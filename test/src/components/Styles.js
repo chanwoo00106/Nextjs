@@ -8,6 +8,7 @@ export const HeaderStyle = styled.div`
   width: 100%;
   position: fixed;
   box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+  z-index: 100;
 
   ul {
     display: flex;
@@ -61,7 +62,6 @@ export const AddStyle = styled.form`
 
   .img {
     width: 100%;
-    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,5 +111,6 @@ export const AddStyle = styled.form`
     border: none;
     border-radius: 10px;
     margin-top: 20px;
+    cursor: pointer;
   }
 `;

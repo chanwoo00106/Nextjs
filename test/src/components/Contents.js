@@ -12,8 +12,8 @@ const Contents = () => {
             <Image
               alt="testImage"
               src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-              width={100}
-              height={300}
+              width={500}
+              height={500}
             />
             <h1 className="title">title</h1>
             <p className="text">contents</p>
