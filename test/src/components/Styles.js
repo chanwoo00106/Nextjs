@@ -29,10 +29,11 @@ export const HeaderStyle = styled.div`
 `;
 
 export const ContentsStyle = styled.div`
+  width: 600px;
+  margin: 0 auto;
   .cont {
-    margin: 0 auto;
     padding: 20px;
-    width: 600px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;

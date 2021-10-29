@@ -6,7 +6,7 @@ import Link from "next/link";
 const Contents = () => {
   return (
     <S.ContentsStyle>
-      <Link href={`/about/1`}>
+      <Link href={`/image/1`}>
         <a>
           <section className="cont">
             <Image

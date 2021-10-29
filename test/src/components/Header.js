@@ -15,14 +15,21 @@ const Header = () => {
           <li>
             <Link href="/">
               <a>
-                <div className="sub-menu">home</div>
+                <div className="sub-menu">Home</div>
               </a>
             </Link>
           </li>
           <li>
             <Link href="/image">
               <a>
-                <div className="sub-menu">image</div>
+                <div className="sub-menu">Images</div>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/add">
+              <a>
+                <div className="sub-menu">Add</div>
               </a>
             </Link>
           </li>
