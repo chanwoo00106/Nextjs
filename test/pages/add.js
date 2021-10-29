@@ -1,11 +1,12 @@
 import React from "react";
+import Add from "../src/components/Add";
 import Header from "../src/components/Header";
 
 const add = () => {
   return (
     <div>
       <Header />
-      <h1>add page</h1>
+      <Add />
     </div>
   );
 };
