@@ -5,17 +5,25 @@ import Contents from "../../src/components/Contents";
 import Header from "../../src/components/Header";
 
 const Page = () => {
-  const router = useRouter();
   const [data, setData] = useState();
+  const router = useRouter();
   console.log(router.query);
   useEffect(() => {
     async function get() {
-      const res = await axios.get(`http://localhost:3300/${router.query.id}`);
-      console.log(res.data);
-      setData(res.data);
+      if (router.query.id) {
+        try {
+          const res = await axios.get(
+            `http://localhost:3300/${router.query.id}`
+          );
+          console.log(res.data);
+          setData(res.data);
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
     get();
-  }, []);
+  }, [router.query.id]);
   return (
     <div>
       <Header />

@@ -7,7 +7,7 @@ const Contents = ({ data }) => {
   console.log(data);
   return (
     <S.ContentsStyle>
-      <Link href={`/image/${data.id}`}>
+      <Link href={`/detail/${data.id}`}>
         <a>
           <section className="cont">
             {data.data && (

@@ -10,16 +10,20 @@ const Add = () => {
   const [input, setInput] = useState({ title: "", text: "", src: "" });
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios({
-      method: "post",
-      url: "http://localhost:3300/",
-      data: {
-        title: input.title,
-        description: input.text,
-        data: input.src,
-      },
-    });
-    router.push("/");
+    try {
+      await axios({
+        method: "post",
+        url: "http://localhost:3300/",
+        data: {
+          title: input.title,
+          description: input.text,
+          data: input.src,
+        },
+      });
+      router.push("/");
+    } catch (e) {
+      alert("파일 용량이 너무 큽니다.");
+    }
   };
 
   const onChange = (e) => {
