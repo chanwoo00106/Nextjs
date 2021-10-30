@@ -3,20 +3,17 @@ import * as S from "./Styles";
 import Image from "next/image";
 import Link from "next/link";
 
-const Contents = () => {
+const Contents = ({ data }) => {
   return (
     <S.ContentsStyle>
-      <Link href={`/image/1`}>
+      <Link href={`/image/${data.id}`}>
         <a>
           <section className="cont">
-            <Image
-              alt="testImage"
-              src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-              width={500}
-              height={500}
-            />
-            <h1 className="title">title</h1>
-            <p className="text">contents</p>
+            {data.data && (
+              <Image alt="testImage" src={data.data} width={500} height={500} />
+            )}
+            <h1 className="title">{data.title}</h1>
+            <p className="text">{data.description}</p>
           </section>
         </a>
       </Link>

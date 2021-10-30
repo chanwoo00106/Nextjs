@@ -9,6 +9,7 @@ export const HeaderStyle = styled.div`
   position: fixed;
   box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
   z-index: 100;
+  background: #ffffffff;
 
   ul {
     display: flex;
@@ -31,7 +32,8 @@ export const HeaderStyle = styled.div`
 
 export const ContentsStyle = styled.div`
   width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
+
   .cont {
     padding: 20px;
     width: 100%;
@@ -72,6 +74,7 @@ export const AddStyle = styled.form`
     }
     h1 {
       text-align: center;
+      cursor: pointer;
     }
 
     input {

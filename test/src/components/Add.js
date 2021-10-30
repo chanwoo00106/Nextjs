@@ -1,12 +1,25 @@
 import React from "react";
 import * as S from "./Styles";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import axios from "axios";
 
 const Add = () => {
+  const router = useRouter();
   const [input, setInput] = useState({ title: "", text: "", src: "" });
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    await axios({
+      method: "post",
+      url: "http://localhost:3300/",
+      data: {
+        title: input.title,
+        description: input.text,
+        data: input.src,
+      },
+    });
+    router.push("/");
   };
 
   const onChange = (e) => {
