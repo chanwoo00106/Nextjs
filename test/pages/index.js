@@ -6,9 +6,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [data, setData] = useState();
+  const [data, setData] = useState(undefined);
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     async function get() {
       try {
         const res = await axios.get("http://localhost:3300/");
@@ -16,6 +18,7 @@ export default function Home() {
       } catch (e) {
         setError(e.response.status);
       }
+      setLoading(false);
     }
     get();
   }, []);
@@ -29,8 +32,8 @@ export default function Home() {
         <title>Main</title>
       </Head>
       <Header />
-      {error ? (
-        <h1>{error ? "데이터를 받아오는 중..." : "데이터가 없습니다."}</h1>
+      {loading ? (
+        <h1>데이터를 받아오는 중...</h1>
       ) : (
         <>{data && data.map((d) => <Contents key={d.id} data={d} />)}</>
       )}
