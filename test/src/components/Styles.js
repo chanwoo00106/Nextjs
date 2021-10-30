@@ -28,6 +28,9 @@ export const HeaderStyle = styled.div`
     padding: 10px;
     width: 120px;
   }
+  .bold {
+    font-weight: bold;
+  }
 `;
 
 export const ContentsStyle = styled.div`

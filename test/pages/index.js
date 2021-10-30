@@ -1,4 +1,4 @@
-import { Wrapper } from "../styles/Home.styles";
+import * as S from "../styles/Home.styles";
 import Head from "next/head";
 import Header from "../src/components/Header";
 import Contents from "../src/components/Contents";
@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState(undefined);
-  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -16,27 +15,24 @@ export default function Home() {
         const res = await axios.get("http://localhost:3300/");
         setData(res.data);
       } catch (e) {
-        setError(e.response.status);
+        console.log(e);
       }
       setLoading(false);
     }
     get();
   }, []);
 
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
   return (
-    <Wrapper>
+    <S.Wrapper>
       <Head>
         <title>Main</title>
       </Head>
       <Header />
       {loading ? (
-        <h1>데이터를 받아오는 중...</h1>
+        <h1 className="loading">데이터를 받아오는 중...</h1>
       ) : (
         <>{data && data.map((d) => <Contents key={d.id} data={d} />)}</>
       )}
-    </Wrapper>
+    </S.Wrapper>
   );
 }

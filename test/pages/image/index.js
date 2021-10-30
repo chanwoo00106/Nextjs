@@ -3,6 +3,7 @@ import Header from "../../src/components/Header";
 import axios from "axios";
 import Image from "next/image";
 import * as S from "../../styles/Image.style";
+import Link from "next/link";
 
 const ImagePage = () => {
   const [data, setData] = useState();
@@ -22,7 +23,11 @@ const ImagePage = () => {
       <Header />
       {data &&
         data.map((i) => (
-          <Image key={i.id} src={i.data} alt="img" width={500} height={500} />
+          <Link key={i.id} href={`/detail/${i.id}`}>
+            <a>
+              <Image src={i.data} alt="img" width={500} height={500} />
+            </a>
+          </Link>
         ))}
     </S.Wrapper>
   );

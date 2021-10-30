@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Contents = ({ data }) => {
-  console.log(data);
   return (
     <S.ContentsStyle>
       <Link href={`/detail/${data.id}`}>

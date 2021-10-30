@@ -1,8 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import * as S from "./Styles";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+
+  console.log(router.pathname);
   return (
     <>
       <S.HeaderStyle>
@@ -15,21 +19,42 @@ const Header = () => {
           <li>
             <Link href="/">
               <a>
-                <div className="sub-menu">Home</div>
+                <div
+                  className={`sub-menu ${
+                    router.pathname === "/" ? "bold" : ""
+                  }`}
+                >
+                  Home
+                </div>
               </a>
             </Link>
           </li>
           <li>
             <Link href="/image">
               <a>
-                <div className="sub-menu">Images</div>
+                <div
+                  className={`sub-menu ${
+                    router.pathname === "/image" ||
+                    router.pathname === "/detail/[id]"
+                      ? "bold"
+                      : ""
+                  }`}
+                >
+                  Images
+                </div>
               </a>
             </Link>
           </li>
           <li>
             <Link href="/add">
               <a>
-                <div className="sub-menu">Add</div>
+                <div
+                  className={`sub-menu ${
+                    router.pathname === "/add" ? "bold" : ""
+                  }`}
+                >
+                  Add
+                </div>
               </a>
             </Link>
           </li>
