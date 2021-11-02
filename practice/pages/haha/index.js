@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import axios from "axios";
 import styles from "../../styles/Hahas.module.css";
 
@@ -21,9 +22,11 @@ export default function HahaIndex({ data }) {
         <h1>All HaHa</h1>
         {data.map((i) => (
           <div key={i.id}>
-            <a className={styles.single}>
-              <h3>{i.name}</h3>
-            </a>
+            <Link href={`/haha/${i.id}`}>
+              <a className={styles.single}>
+                <h3>{i.name}</h3>
+              </a>
+            </Link>
           </div>
         ))}
       </div>
