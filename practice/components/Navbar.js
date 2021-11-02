@@ -12,7 +12,7 @@ export default function Navbar() {
           height={77}
           alt="Shroom-logo"
         />
-        <h1>Anything</h1>
+        <h1>Teemo</h1>
       </div>
       <Link href="/">
         <a>Home</a>
