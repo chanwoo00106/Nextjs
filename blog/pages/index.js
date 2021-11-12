@@ -1,10 +1,11 @@
-import Head from "next/head";
-import Header from "../components/Header.js";
+import Header from "../components/Header/Header.js";
+import Meta from "../components/Meta";
 
 export default function Home() {
   return (
     <>
-      <Header title={"제목입니다"} />
+      <Meta title="ChanLog" description="this page is ChanLog" />
+      <Header />
       <div>
         <h1>hello</h1>
         <p>this page is main</p>
