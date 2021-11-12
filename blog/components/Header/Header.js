@@ -1,12 +1,12 @@
 import Link from "next/link";
 import * as S from "./style.js";
 
-export default function Header({ title }) {
+export default function Header() {
   return (
     <>
       <S.Wrapper>
         <div className="title-menu">
-          <h1>chanlog</h1>
+          <h1>ChanLog</h1>
           <ul>
             <li>
               <Link href="/">
@@ -15,7 +15,7 @@ export default function Header({ title }) {
             </li>
             <li>
               <Link href="/write">
-                <a>About</a>
+                <a>Write</a>
               </Link>
             </li>
           </ul>
