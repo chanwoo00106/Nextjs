@@ -53,16 +53,4 @@ export const Wrapper = styled.div`
     font-size: 1rem;
     resize: none;
   }
-
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
-
-    &:hover {
-      background: #cecccc;
-    }
-  }
 `;
