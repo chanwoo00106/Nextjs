@@ -3,7 +3,7 @@ import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import marked from "marked";
+import { marked } from "marked";
 
 export default function PostPage({
   frontmatter: { title, date, cover_image },
@@ -19,6 +19,7 @@ export default function PostPage({
           <p>back</p>
         </a>
       </Link>
+      <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
     </div>
   );
 }
@@ -31,7 +32,6 @@ export async function getStaticPaths() {
     },
   }));
 
-  console.log(paths);
   return {
     paths,
     fallback: false,

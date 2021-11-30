@@ -13,3 +13,11 @@ cover_image: "/img/Beemo.jpg"
 - four
 
 > never underestimate the power of the scout's code
+
+```js
+const a = () => {
+  console.log("hello");
+};
+
+a();
+```
