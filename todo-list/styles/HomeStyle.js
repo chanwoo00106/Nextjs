@@ -16,7 +16,6 @@ export const MainStyle = css`
   }
   .title {
     text-align: center;
-    margin-bottom: 10px;
   }
   .todoList {
     list-style: none;
@@ -26,5 +25,13 @@ export const MainStyle = css`
 export const ListStyle = css`
   .list {
     padding: 10px;
+    background: #c7c4c4ff;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .list:hover {
+    background: #aaa6a6;
   }
 `;

@@ -1,14 +1,22 @@
 import { ListStyle } from "../styles/HomeStyle";
+import { useState } from "react";
+import { toggle as toggled } from "../api/todo";
 
 export default function Todo({ todo }) {
+  const [toggle, setToggle] = useState(todo.toggle);
   const start_date = new Date(todo.start_date);
   const end_date = new Date(todo.end_date);
 
+  const onClick = async () => {
+    setToggle(!toggle);
+    toggled(todo.id);
+  };
+
   return (
-    <li className="list">
+    <li className="list" onClick={onClick}>
       <h3
         style={{
-          textDecoration: todo.toggle ? "solid line-through black 3px" : "",
+          textDecoration: toggle ? "solid line-through black 3px" : "",
         }}
       >
         {todo.todo}
