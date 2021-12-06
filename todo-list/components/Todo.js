@@ -1,6 +1,6 @@
 import { ListStyle } from "../styles/HomeStyle";
 import { useState } from "react";
-import { toggle as toggled } from "../api/todo";
+import { remove, toggle as toggled } from "../api/todo";
 
 export default function Todo({ todo }) {
   const [toggle, setToggle] = useState(todo.toggle);
@@ -8,12 +8,19 @@ export default function Todo({ todo }) {
   const end_date = new Date(todo.end_date);
 
   const onClick = async () => {
+    toggled({ id: todo.id, toggle: !toggle });
     setToggle(!toggle);
-    toggled(todo.id);
+  };
+
+  const onContextMenu = async (e) => {
+    e.preventDefault();
+    if (confirm("삭제하시겠습니까?")) {
+      await remove({ id: todo.id });
+    }
   };
 
   return (
-    <li className="list" onClick={onClick}>
+    <li className="list" onClick={onClick} onContextMenu={onContextMenu}>
       <h3
         style={{
           textDecoration: toggle ? "solid line-through black 3px" : "",

@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { MainStyle } from "../styles/HomeStyle";
-import axios from "axios";
+import { getAllTodo } from "../api/todo";
 import Todo from "../components/Todo";
 
 export const getStaticProps = async () => {
-  const { data } = await axios.get("http://localhost:4000");
+  const data = await getAllTodo();
   return {
     props: {
       data,

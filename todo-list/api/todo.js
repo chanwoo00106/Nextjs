@@ -9,10 +9,17 @@ export const getAllTodo = async () => {
   }
 };
 
-export const toggle = async ({ id }) => {
+export const toggle = async ({ id, toggle }) => {
   try {
-    const res = await api.patch(`/toggle/${id}`);
-    console.log(res);
+    await api.patch(`/toggle/${id}`, { toggle });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const remove = async ({ id }) => {
+  try {
+    await api.delete(`/delete/${id}`);
   } catch (e) {
     console.log(e);
   }
