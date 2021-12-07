@@ -3,24 +3,24 @@ import { MainStyle } from "../styles/HomeStyle";
 import { getAllTodo } from "../api/todo";
 import Todo from "../components/Todo";
 import Add from "../components/Add";
-import { useRecoilState, useRecoilValue } from "recoil";
-import todoState from "../states/todo";
+import { useState } from "react";
 
 export const getStaticProps = async () => {
-  const res = await getAllTodo();
+  const data = await getAllTodo();
   return {
     props: {
-      res,
+      data,
     },
   };
 };
 
-export default function Home({ res }) {
-  const [_, setTodos] = useRecoilState(todoState);
-  const todos = useRecoilValue(todoState);
-  setTodos(res);
-  console.log(todos);
-
+export default function Home({ data }) {
+  const [todos, setTodos] = useState(data);
+  const updateData = async () => {
+    const res = await getAllTodo();
+    console.log(res);
+    await setTodos([...res]);
+  };
   return (
     <div className="wrap">
       <div className="main">
@@ -32,11 +32,11 @@ export default function Home({ res }) {
 
         <h1 className="title">Todo List</h1>
 
-        <Add />
+        <Add updateData={updateData} />
 
         <ul className="todoList">
           {todos.map((todo) => (
-            <Todo key={todo.id} todo={todo} />
+            <Todo key={todo.id} updateData={updateData} todo={todo} />
           ))}
         </ul>
       </div>

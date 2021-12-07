@@ -1,8 +1,5 @@
 import { ListStyle } from "../styles/HomeStyle";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import todoState from "../states/todo";
-import produce from "immer";
 import { remove, toggle as toggled } from "../api/todo";
 import {
   IoCheckmarkCircle,
@@ -10,8 +7,7 @@ import {
   IoCheckmarkCircleOutline,
 } from "react-icons/io5";
 
-export default function Todo({ todo }) {
-  const [todos, setTodos] = useRecoilState(todoState);
+export default function Todo({ updateData, todo }) {
   const [toggle, setToggle] = useState(todo.toggle);
   const start_date = new Date(todo.start_date);
   const end_date = new Date(todo.end_date);
@@ -23,11 +19,7 @@ export default function Todo({ todo }) {
 
   const onRemove = async () => {
     await remove(todo.id);
-    setTodos(
-      produce(todos, (draft) => {
-        draft.filter((i) => i.id !== todo.id);
-      })
-    );
+    await updateData();
   };
 
   return (

@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { AddStyle } from "../styles/HomeStyle";
 import { add } from "../api/todo";
-import { useRecoilState } from "recoil";
-import todoState from "../states/todo";
 
-export default function Add() {
-  const [todos, setTodos] = useRecoilState(todoState);
+export default function Add({ updateData }) {
   const [text, setText] = useState({ text: "", date: "" });
 
   const onChage = (e) => {
@@ -15,17 +12,9 @@ export default function Add() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await add({ todo: text.text, end_date: text.date });
-
-    setTodos([
-      ...todos,
-      {
-        id: 1000,
-        todo: text.text,
-        end_date: text.date,
-      },
-    ]);
-
+    await updateData();
     setText({ ...text, text: "" });
+    2;
   };
 
   return (
