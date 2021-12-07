@@ -24,3 +24,11 @@ export const remove = async (id) => {
     console.log(e);
   }
 };
+
+export const add = async ({ todo, end_date }) => {
+  try {
+    await api.post("/add", { todo, end_date: `${end_date}T23:59:59` });
+  } catch (e) {
+    console.log(e);
+  }
+};

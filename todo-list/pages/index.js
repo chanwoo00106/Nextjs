@@ -2,6 +2,7 @@ import Head from "next/head";
 import { MainStyle } from "../styles/HomeStyle";
 import { getAllTodo } from "../api/todo";
 import Todo from "../components/Todo";
+import Add from "../components/Add";
 
 export const getStaticProps = async () => {
   const data = await getAllTodo();
@@ -23,6 +24,8 @@ export default function Home({ data }) {
         </Head>
 
         <h1 className="title">Todo List</h1>
+
+        <Add />
 
         <ul className="todoList">
           {data.map((todo) => (

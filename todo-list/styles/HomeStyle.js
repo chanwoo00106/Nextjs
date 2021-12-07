@@ -16,6 +16,7 @@ export const MainStyle = css`
   }
   .title {
     text-align: center;
+    margin-bottom: 10px;
   }
   .todoList {
     list-style: none;
@@ -44,5 +45,30 @@ export const ListStyle = css`
 
   .list:hover {
     background: #aaa6a6;
+  }
+`;
+
+export const AddStyle = css`
+  .wrap {
+    display: grid;
+    grid-template-columns: 5fr 2.6fr 1fr;
+    grid-gap: 10px;
+  }
+
+  input {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    background: #0d6efd;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
   }
 `;
