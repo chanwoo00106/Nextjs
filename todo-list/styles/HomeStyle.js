@@ -8,9 +8,11 @@ export const MainStyle = css`
     height: 100vh;
   }
   .main {
-    padding: 10px;
+    padding: 20px;
     width: 40vw;
     min-height: 50vh;
+    max-height: 80vh;
+    overflow: auto;
     background: #f1f1f1;
     border-radius: 10px;
   }

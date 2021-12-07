@@ -18,7 +18,8 @@ export default function Home({ data }) {
   const [todos, setTodos] = useState(data);
   const updateData = async () => {
     const res = await getAllTodo();
-    setTodos([...res]);
+    console.log(res);
+    await setTodos([...res]);
   };
   return (
     <div className="wrap">

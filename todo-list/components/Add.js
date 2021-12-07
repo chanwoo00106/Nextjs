@@ -13,11 +13,19 @@ export default function Add({ updateData }) {
     e.preventDefault();
     await add({ todo: text.text, end_date: text.date });
     await updateData();
+    setText({ ...text, text: "" });
+    2;
   };
 
   return (
     <form className="wrap" onSubmit={onSubmit}>
-      <input type="text" name="text" onChange={onChage} value={text.text} />
+      <input
+        placeholder="todo 입력"
+        type="text"
+        name="text"
+        onChange={onChage}
+        value={text.text}
+      />
       <input type="date" name="date" onChange={onChage} value={text.date} />
       <button>Add</button>
       <style jsx>{AddStyle}</style>
