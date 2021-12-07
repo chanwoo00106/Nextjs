@@ -2,16 +2,17 @@ import { useState } from "react";
 import { AddStyle } from "../styles/HomeStyle";
 import { add } from "../api/todo";
 
-export default function Add() {
+export default function Add({ updateData }) {
   const [text, setText] = useState({ text: "", date: "" });
 
   const onChage = (e) => {
     setText({ ...text, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    add({ todo: text.text, end_date: text.date });
+    await add({ todo: text.text, end_date: text.date });
+    await updateData();
   };
 
   return (

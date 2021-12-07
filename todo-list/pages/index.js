@@ -3,6 +3,7 @@ import { MainStyle } from "../styles/HomeStyle";
 import { getAllTodo } from "../api/todo";
 import Todo from "../components/Todo";
 import Add from "../components/Add";
+import { useState } from "react";
 
 export const getStaticProps = async () => {
   const data = await getAllTodo();
@@ -14,6 +15,11 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ data }) {
+  const [todos, setTodos] = useState(data);
+  const updateData = async () => {
+    const res = await getAllTodo();
+    setTodos([...res]);
+  };
   return (
     <div className="wrap">
       <div className="main">
@@ -25,11 +31,11 @@ export default function Home({ data }) {
 
         <h1 className="title">Todo List</h1>
 
-        <Add />
+        <Add updateData={updateData} />
 
         <ul className="todoList">
-          {data.map((todo) => (
-            <Todo key={todo.id} todo={todo} />
+          {todos.map((todo) => (
+            <Todo key={todo.id} updateData={updateData} todo={todo} />
           ))}
         </ul>
       </div>

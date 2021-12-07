@@ -7,7 +7,7 @@ import {
   IoCheckmarkCircleOutline,
 } from "react-icons/io5";
 
-export default function Todo({ todo }) {
+export default function Todo({ updateData, todo }) {
   const [toggle, setToggle] = useState(todo.toggle);
   const start_date = new Date(todo.start_date);
   const end_date = new Date(todo.end_date);
@@ -17,7 +17,10 @@ export default function Todo({ todo }) {
     setToggle(!toggle);
   };
 
-  const onRemove = async () => await remove(todo.id);
+  const onRemove = async () => {
+    await remove(todo.id);
+    await updateData();
+  };
 
   return (
     <li className="list">
