@@ -24,11 +24,22 @@ export const MainStyle = css`
 
 export const ListStyle = css`
   .list {
-    padding: 10px;
+    padding: 10px 20px 10px 10px;
     background: #c7c4c4ff;
     margin: 10px 0;
     border-radius: 10px;
-    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .icons {
+    grid-column: 2 / 3;
+    grid-row: -3 / -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-gap: 10px;
   }
 
   .list:hover {

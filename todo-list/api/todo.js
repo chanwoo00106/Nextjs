@@ -17,7 +17,7 @@ export const toggle = async ({ id, toggle }) => {
   }
 };
 
-export const remove = async ({ id }) => {
+export const remove = async (id) => {
   try {
     await api.delete(`/delete/${id}`);
   } catch (e) {
