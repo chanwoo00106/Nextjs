@@ -3,12 +3,10 @@ import SideBar from "../components/Sidbar";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="bg-black h-screen overflow-hidden">
       <Head>
         <title>spotify</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>This is a Test</h1>
 
       <main>
         <SideBar />

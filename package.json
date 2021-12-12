@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "next-auth": "^4.0.5",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}
