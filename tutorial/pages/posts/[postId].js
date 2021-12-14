@@ -25,6 +25,13 @@ export async function getStaticProps(context) {
   const { data } = await axios.get(
     `https://jsonplaceholder.typicode.com/posts/${params.postId}`
   );
+
+  if (!data.id) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       post: data,
@@ -41,6 +48,6 @@ export async function getStaticPaths({ params }) {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 }

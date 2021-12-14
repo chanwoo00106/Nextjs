@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next Js
 
-## Getting Started
+Next에서 빌드 타임에 data를 생성 하려면, 해당 컴포넌트에서<br>
+`getStaticPaths` + `getStaticProps`를 export 해줘야 한다.
 
-First, run the development server:
+## getStaticProps 반환 객체
 
-```bash
-npm run dev
-# or
-yarn dev
+어떤 path들에 대해서 정적 페이지 생성을 할지 정하는 getStaticPaths 함수는<br>
+반환 객체로 paths 키와 fallback 키를 반드시 포함시켜야한다.
+
+```js
+// getStaticPaths
+return {
+  paths: [
+    { params: { id: '1' } },
+    { params: { id: '2' } }
+  ],
+  fallback: ...
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next JS는 `users/1`, `users/2` 페이지를 빌드타임에 생성하게 된다.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## paths
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+어떤 path의 페이지들을 빌드 타임에 생성할지 정하는 배열이다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## fallback
 
-## Learn More
+안에 들어갈 수 있는 값은 boolean 또는 'blocking' 값이다
 
-To learn more about Next.js, take a look at the following resources:
+- ### false인 경우
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  `getStaticPaths`가 반환하지 않은 path에서는 404에러를 띄운다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  #### 아래와 같은 경우 사용
 
-## Deploy on Vercel
+  적은 숫자의 path만 프리렌더링 해야하는 경우<br>
+  새로운 페이지가 추가 될 일이 많지 않은 경우<br>
+  -> 새로운 페이지가 자주 추가 된다면, 추가될 때 마다 다시 빌드해줘야한다
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ### true인 경우
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  1. `getStaticPaths` 가 반환한 path들은 빌드 타임에 HTML로 렌더링된다
+
+  2. 이외의 path들에 대한 요청이 들어온 경우, 404 페이지를 반환하지 않고,<br> 페이지의 "fallback" 버전을 먼저 보여준다
+
+  3. Next js가 요청된 path에 대해서 getStaticProps 함수를 이용하여<br>
+     HTML 파일과 JSON 파일을 만들어낸다
+
+  4. 백그라운드 작업이 끝나면, 요청된 path에 해당하는 JSON 파일을 받아서<br>
+     새롭게 페이지를 렌더링한다.
+
+  5. 새롭게 생성된 페이지를 기존의 빌드시 프리렌더링 된 페이지 리스트에 추가한다.
+
+  #### 아래와 같은 경우 사용
+
+  데이터에 의존하는 정적 페이지를 많이 가지고 있으나, 빌드 시에 모든 페이지를 생성하는건 너무나 큰 작업일 때
+
+- ### `blocking`인 경우
+
+  true인 경우와 비슷하지만, 생성중에 사용자에게 fallback 페이지를 보여주지 않고,<br>
+  ssr처럼 동작해서 아무것도 보여주지 않는다.

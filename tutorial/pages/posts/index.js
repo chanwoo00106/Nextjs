@@ -26,6 +26,6 @@ export async function getStaticProps() {
     "https://jsonplaceholder.typicode.com/posts"
   );
   return {
-    props: { posts: data.slice(0, 3) },
+    props: { posts: data },
   };
 }
