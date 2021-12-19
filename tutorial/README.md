@@ -97,3 +97,35 @@ pre-render를 해준다
 
 - 요청 시 데이터를 가져와야 하는 페이지를 사전 렌더링 해야 하는 경우에만
 - 데이터를 미리 렌더링 할 필요가 없다면 Client-Side에서 데이터 페칭을 고려해 봐야 한다.
+
+## client side render
+
+next에서도 client side render가 가능한데 하는 방법은 간단하다<br>
+react에서 사용하는 `useState`와 `useEffect`를 사용하면 된다
+
+```js
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function Home() {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    async function get() {
+      const { data } = await axios.get("어딘가");
+      setData(data);
+      setIsLoading(false);
+    }
+  });
+
+  if (isLoading) return <h1>Loading...</h1>;
+
+  return (
+    <div>
+      <h1>{data}</h1>
+    </div>
+  );
+}
+```
+
+대충 위와 같은 형식으로 하면 된다.
