@@ -15,7 +15,7 @@ export async function getServerSideProps() {
 }
 
 async function saveContact(contact) {
-  const res = await fetch("/api/hello", {
+  const res = await fetch("/api/contact", {
     method: "POST",
     body: JSON.stringify(contact),
   });
@@ -26,6 +26,18 @@ async function saveContact(contact) {
   return await res.json();
 }
 
+async function deleteContact(id) {
+  const res = await fetch("/api/contact", {
+    method: "DELETE",
+    body: JSON.stringify(id),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  console.log(res.json());
+}
+
 export default function Home({ initialContacts }) {
   const [input, setInput] = useState({
     firstName: "",
@@ -33,7 +45,7 @@ export default function Home({ initialContacts }) {
     email: "",
     avatar: "",
   });
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState([...initialContacts]);
 
   const onChange = (e) => {
     setInput({
@@ -46,6 +58,11 @@ export default function Home({ initialContacts }) {
     saveContact(input);
     setContacts([...contacts, input]);
     setInput({ firstName: "", lastName: "", email: "", avatar: "" });
+  };
+  const onDelete = (id) => {
+    deleteContact(id);
+    const result = contacts.filter((i) => i.id !== id);
+    setContacts([...result]);
   };
   return (
     <div>
@@ -62,6 +79,7 @@ export default function Home({ initialContacts }) {
             <th>lastName</th>
             <th>email</th>
             <th>avatar</th>
+            <th>delete</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +90,11 @@ export default function Home({ initialContacts }) {
               <td>{contact.lastName}</td>
               <td>{contact.email}</td>
               <td>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img width={50} height={50} src={contact.avatar} alt="avatar" />
+              </td>
+              <td>
+                <button onClick={() => onDelete(contact.id)}>delete</button>
               </td>
             </tr>
           ))}
