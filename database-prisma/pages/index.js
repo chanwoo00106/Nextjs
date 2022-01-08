@@ -1,19 +1,52 @@
 import Head from "next/head";
 
 import { PrismaClient } from "@prisma/client";
+import { useState } from "react";
 
 const prisma = new PrismaClient();
 
 export async function getServerSideProps() {
-  const contacts = await prisma.contact.findMany();
+  const initialContacts = await prisma.contact.findMany();
   return {
     props: {
-      contacts,
+      initialContacts,
     },
   };
 }
 
-export default function Home({ contacts }) {
+async function saveContact(contact) {
+  const res = await fetch("/api/hello", {
+    method: "POST",
+    body: JSON.stringify(contact),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return await res.json();
+}
+
+export default function Home({ initialContacts }) {
+  const [input, setInput] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    avatar: "",
+  });
+  const [contacts, setContacts] = useState(initialContacts);
+
+  const onChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    saveContact(input);
+    setContacts([...contacts, input]);
+    setInput({ firstName: "", lastName: "", email: "", avatar: "" });
+  };
   return (
     <div>
       <Head>
@@ -45,6 +78,40 @@ export default function Home({ contacts }) {
           ))}
         </tbody>
       </table>
+
+      <hr />
+
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          onChange={onChange}
+          value={input.firstName}
+          placeholder="firstName"
+          name="firstName"
+        />
+        <input
+          type="text"
+          onChange={onChange}
+          value={input.lastName}
+          placeholder="lastName"
+          name="lastName"
+        />
+        <input
+          type="text"
+          onChange={onChange}
+          value={input.email}
+          placeholder="email"
+          name="email"
+        />
+        <input
+          type="text"
+          onChange={onChange}
+          value={input.avatar}
+          placeholder="avatar"
+          name="avatar"
+        />
+        <button type="submit">제출</button>
+      </form>
     </div>
   );
 }
