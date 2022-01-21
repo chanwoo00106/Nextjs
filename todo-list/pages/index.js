@@ -8,6 +8,7 @@ export default function Home() {
         <meta name="description" content="practice todo list" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <main></main>
     </div>
   );
 }
