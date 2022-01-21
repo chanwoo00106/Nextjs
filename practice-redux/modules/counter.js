@@ -1,12 +1,19 @@
-const INCREASE = "INCREASE";
-const DECREASE = "DECREASE";
+export const INCREASE = "INCREASE";
+export const DECREASE = "DECREASE";
+export const INCREASESAGA = "INCREASESAGA";
+export const DECREASESAGA = "DECREASESAGA";
 
 export const increase = () => ({
   type: INCREASE,
 });
-
 export const decrease = () => ({
   type: DECREASE,
+});
+export const increaseDelay = () => ({
+  type: INCREASESAGA,
+});
+export const decreaseDelay = () => ({
+  type: DECREASESAGA,
 });
 
 const initialState = 0;
