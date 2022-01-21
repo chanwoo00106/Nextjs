@@ -1,9 +1,11 @@
 import { createWrapper } from "next-redux-wrapper";
-import { createStore } from "redux";
-import { reducer } from "../modules/index";
+import { compose, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import counter from "../modules/counter";
 
 const configureSotre = () => {
-  const store = createStore(reducer);
+  const enhancer = compose(composeWithDevTools());
+  const store = createStore(counter, enhancer);
   return store;
 };
 
