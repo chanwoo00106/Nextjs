@@ -20,25 +20,35 @@ export const delete_todo = (id) => ({
   id,
 });
 
-const initialState = [];
+const initialState = [
+  {
+    id: 0,
+    todo: "놀기",
+    createAt: new Date().toString(),
+    description: "아무 생각 없이 개발하자 ㅎㅎ",
+  },
+];
 
 export default function todo(state = initialState, action) {
-  return produce(state, (draft) => {
-    switch (action) {
-      case ADD_TODO:
-        draft.push({ ...action.payload });
-        break;
-      case UPDATE_TODO:
+  switch (action.type) {
+    case ADD_TODO:
+      return produce(state, (draft) => {
+        draft.push(...action.payload);
+      });
+    case UPDATE_TODO:
+      return produce(state, (draft) => {
         const index = draft.findIndex((todo) => todo.id === action.id);
-        if (index === -1) break;
+        if (index === -1) return;
         draft[index] = {
           id: action.id,
           ...action.payload,
         };
-        break;
-      case DELETE_TODO:
+      });
+    case DELETE_TODO:
+      return produce(state, (draft) => {
         draft = draft.filter((todo) => todo.id !== action.id);
-        break;
-    }
-  });
+      });
+    default:
+      return state;
+  }
 }
