@@ -1,8 +1,13 @@
 import produce from "immer";
 
+const INIT_TODO = "INIT_TODO/todo";
 const ADD_TODO = "ADD_TODO/todo";
 const UPDATE_TODO = "UPDATE_TODO/todo";
 const DELETE_TODO = "DELETE_TODO/todo";
+
+export const init_todo = () => ({
+  type: INIT_TODO,
+});
 
 export const add_todo = (todoData) => ({
   type: ADD_TODO,
@@ -20,14 +25,7 @@ export const delete_todo = (id) => ({
   id,
 });
 
-const initialState = [
-  {
-    id: 0,
-    todo: "놀기",
-    createAt: new Date().toString(),
-    description: "아무 생각 없이 개발하자 ㅎㅎ",
-  },
-];
+const initialState = [];
 
 export default function todo(state = initialState, action) {
   switch (action.type) {
