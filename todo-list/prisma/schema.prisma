@@ -15,4 +15,5 @@ model Todo {
   todo String
   createAt DateTime @default(now())
   description String
+  completeDate DateTime?
 }

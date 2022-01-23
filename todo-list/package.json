@@ -8,9 +8,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/core": "10.1.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "@prisma/client": "^3.8.1",
     "axios": "^0.25.0",
-    "emotion": "^11.0.0",
     "immer": "^9.0.12",
     "next": "12.0.8",
     "next-redux-wrapper": "^7.0.5",
