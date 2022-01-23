@@ -16,4 +16,5 @@ model Todo {
   createAt DateTime @default(now())
   description String
   completeDate DateTime?
+  checked Boolean @default(false)
 }
