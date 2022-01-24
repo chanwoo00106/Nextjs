@@ -14,16 +14,24 @@ function Input() {
   const [input, setInput] = useState("");
   const [selectFile, setSelectFile] = useState();
   const filePickerRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
 
-  const addImageToPost = () => {};
+  const addImageToPost = () => {
+    if (loading) return;
+    setLoading(true);
+  };
 
   const addEmoji = (e) => {
     const sym = e.unified.split("-");
     const codesArray = sym.map((i) => `0x${i}`);
-    const emoji = String.fromCodePoint(codesArray);
-    setInput(input + emoji);
+    try {
+      const emoji = String.fromCodePoint(codesArray);
+      setInput(input + emoji);
+    } catch (e) {}
   };
+
+  const sendPost = () => {};
 
   return (
     <div
@@ -94,6 +102,12 @@ function Input() {
               />
             )}
           </div>
+          <button
+            disabled={!input.trim() && !selectFile}
+            className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 default:cursor-default"
+          >
+            Tweet
+          </button>
         </div>
       </div>
     </div>

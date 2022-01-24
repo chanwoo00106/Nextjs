@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { getProviders, signIn } from "next-auth/react";
 
 function login({ providers }) {
