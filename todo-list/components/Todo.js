@@ -31,4 +31,15 @@ export default Todo;
 const TodoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: rgba(196, 174, 55, 0.3);
+  padding: 0 20px;
+  border-radius: 20px;
+  transition: 0.2s;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &:hover {
+    background: rgba(196, 174, 55, 0.4);
+  }
 `;
