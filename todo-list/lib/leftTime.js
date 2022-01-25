@@ -30,7 +30,7 @@ export function leftTime(completeDate) {
 function getHMS(current, future) {
   const gap = future - current;
   const hour = Math.floor(gap / (1000 * 60 * 60));
-  const min = Math.floor(gap / (1000 * 60 * 60) / (1000 * 60));
-  const sec = Math.floor(gap / (1000 * 60) / 1000);
+  const min = Math.floor(gap / (1000 * 60));
+  const sec = Math.floor(gap / 1000);
   return [hour, min, sec];
 }

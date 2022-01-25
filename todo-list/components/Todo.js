@@ -9,7 +9,9 @@ function Todo({ todo }) {
   return (
     <TodoWrapper
       onClick={() => dispatch(check_todo(todo.id))}
-      style={{ textDecoration: todo.checked && "line-through" }}
+      style={{
+        textDecoration: todo.checked && "solid line-through 4px",
+      }}
     >
       <h3>{todo.todo}</h3>
       <div>

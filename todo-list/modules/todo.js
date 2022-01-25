@@ -43,7 +43,7 @@ export default function todo(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
       return produce(state, (draft) => {
-        draft.push(...action.payload);
+        draft.unshift(...action.payload);
       });
     case UPDATE_TODO:
       return produce(state, (draft) => {
