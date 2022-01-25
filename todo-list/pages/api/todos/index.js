@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       res.status(200).json({ todos });
     } else if (method === "POST") {
       const createTodo = await prisma.todo.create({
-        data: { ...body },
+        data: { ...body, completeDate: `${body.completeDate}T00:00:00.000Z` },
       });
       res.status(200).json(createTodo);
     } else {

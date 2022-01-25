@@ -18,9 +18,11 @@ export default function Home() {
       <TodoMain>
         <Title>chan woo의 Todo list</Title>
         <Input />
-        {todos?.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
-        ))}
+        <Todos>
+          {todos?.map((todo) => (
+            <Todo key={todo.id} todo={todo} />
+          ))}
+        </Todos>
       </TodoMain>
     </MainWrapper>
   );
@@ -36,6 +38,8 @@ const MainWrapper = styled.div`
 `;
 
 const TodoMain = styled.main`
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   width: 600px;
   height: 700px;
@@ -53,4 +57,8 @@ const TodoMain = styled.main`
 const Title = styled.h1`
   text-align: center;
   font-size: 2.5rem;
+`;
+
+const Todos = styled.div`
+  overflow: auto;
 `;
