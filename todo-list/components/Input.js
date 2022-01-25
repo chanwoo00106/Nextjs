@@ -9,23 +9,28 @@ function Input() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(add_todo([value]));
+    if (value.todo.trim() === "") {
+      alert("todo를 입력해 주세요");
+      return;
+    }
     setValue({ todo: "", completeDate: "" });
   };
 
   return (
     <InputForm onSubmit={onSubmit}>
-      <input
+      <InputTodo
         type="text"
+        placeholder="todo 입력"
         value={value.todo}
         onChange={(e) => setValue({ ...value, todo: e.target.value })}
       />
-      <input
+      <InputDate
+        id="inputdate"
         type="date"
         value={value.completeDate}
         onChange={(e) => setValue({ ...value, completeDate: e.target.value })}
       />
-      <button type="submit">추가</button>
+      <SubmitBtn type="submit">추가</SubmitBtn>
     </InputForm>
   );
 }
@@ -36,7 +41,34 @@ const InputForm = styled.form`
   width: 100%;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
-  height: 50px;
+  height: 60px;
   padding: 10px;
   gap: 5px;
+`;
+
+const InputTodo = styled.input`
+  outline: none;
+  border: none;
+  background: #e2e2e2;
+  border-radius: 20px;
+  padding: 0 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: inherit;
+`;
+
+const InputDate = styled.input`
+  border: none;
+  outline: none;
+  background: #efefef;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0 5px;
+`;
+
+const SubmitBtn = styled.button`
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 `;

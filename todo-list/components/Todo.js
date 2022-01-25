@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { check_todo } from "../modules/todo";
+import styled from "@emotion/styled";
 
 function leftTime(completeDate) {
   const current = new Date();
