@@ -1,6 +1,7 @@
 import produce from "immer";
 
 const INIT_TODO = "INIT_TODO/todo";
+const CREATE_TODO = "CREATE_TODO/todo";
 const ADD_TODO = "ADD_TODO/todo";
 const UPDATE_TODO = "UPDATE_TODO/todo";
 const DELETE_TODO = "DELETE_TODO/todo";
@@ -8,6 +9,11 @@ const CHECK_TODO = "CHECK_TODO/todo";
 
 export const init_todo = () => ({
   type: INIT_TODO,
+});
+
+export const create_todo = (todoData) => ({
+  type: CREATE_TODO,
+  payload: todoData,
 });
 
 export const add_todo = (todoData) => ({

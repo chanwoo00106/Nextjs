@@ -9,8 +9,6 @@ export default async function handler(req, res) {
     body: { checked },
   } = req;
 
-  console.log(id, checked);
-
   if (method === "PATCH") {
     // checked 수정
     if (checked === undefined) res.status(400).json({ message: "Bad Request" });

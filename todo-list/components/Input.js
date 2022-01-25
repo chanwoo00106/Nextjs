@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { add_todo } from "../modules/todo";
+import { create_todo } from "../modules/todo";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -13,6 +13,12 @@ function Input() {
       alert("todo를 입력해 주세요");
       return;
     }
+    dispatch(
+      create_todo({
+        ...value,
+        completeDate: value.completeDate ? value.completeDate : null,
+      })
+    );
     setValue({ todo: "", completeDate: "" });
   };
 

@@ -8,3 +8,8 @@ export async function getAllTodos() {
 export async function getCheckedTodo({ id, checked }) {
   await axios.patch(`/api/todos/${id}`, { checked });
 }
+
+export async function postCreateTodo(TodoData) {
+  const { data } = await axios.post("/api/todos", TodoData);
+  return data;
+}

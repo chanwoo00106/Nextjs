@@ -1,9 +1,10 @@
 import { call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import { add_todo } from "../modules/todo";
-import { getAllTodos, getCheckedTodo } from "./api";
+import { getAllTodos, getCheckedTodo, postCreateTodo } from "./api";
 
 const INIT_TODO = "INIT_TODO/todo";
 const CHECK_TODO = "CHECK_TODO/todo";
+const CREATE_TODO = "CREATE_TODO/todo";
 
 function* getTodo() {
   try {
@@ -27,7 +28,17 @@ function* checkTodo(action) {
   }
 }
 
+function* createTodo(action) {
+  try {
+    const res = yield call(postCreateTodo, action.payload);
+    yield put(add_todo([res]));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export default function* todoSaga() {
   yield takeLatest(INIT_TODO, getTodo);
   yield takeEvery(CHECK_TODO, checkTodo);
+  yield takeLatest(CREATE_TODO, createTodo);
 }

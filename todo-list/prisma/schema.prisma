@@ -14,7 +14,7 @@ model Todo {
   id Int @id @default(autoincrement())
   todo String
   createAt DateTime @default(now())
-  description String
+  description String?
   completeDate DateTime?
   checked Boolean @default(false)
 }
