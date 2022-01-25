@@ -13,3 +13,8 @@ export async function postCreateTodo(TodoData) {
   const { data } = await axios.post("/api/todos", TodoData);
   return data;
 }
+
+export async function deleteRemoveTodo(id) {
+  const { data } = await axios.delete(`/api/todos/${id}`);
+  return data;
+}

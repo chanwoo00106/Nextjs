@@ -55,9 +55,7 @@ export default function todo(state = initialState, action) {
         };
       });
     case DELETE_TODO:
-      return produce(state, (draft) => {
-        draft = draft.filter((todo) => todo.id !== action.id);
-      });
+      return state.filter((todo) => todo.id !== action.id);
     case CHECK_TODO:
       return produce(state, (draft) => {
         const index = draft.findIndex((todo) => todo.id === action.id);

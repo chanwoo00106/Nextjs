@@ -22,7 +22,6 @@ export default async function handler(req, res) {
       res.status(404).json({ message: "404 Not Found" });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json(error);
   }
 }

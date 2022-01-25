@@ -1,14 +1,21 @@
 import { useDispatch } from "react-redux";
-import { check_todo } from "../modules/todo";
+import { check_todo, delete_todo } from "../modules/todo";
 import styled from "@emotion/styled";
 import { leftTime } from "../lib/leftTime";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
+  const onContextMenu = (e) => {
+    e.preventDefault();
+    if (confirm("정말 삭제하시겠습니까?")) {
+      dispatch(delete_todo(todo.id));
+    }
+  };
 
   return (
     <TodoWrapper
       onClick={() => dispatch(check_todo(todo.id))}
+      onContextMenu={onContextMenu}
       style={{
         textDecoration: todo.checked && "solid line-through 4px",
       }}
