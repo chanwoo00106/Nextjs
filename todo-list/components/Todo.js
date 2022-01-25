@@ -1,14 +1,7 @@
 import { useDispatch } from "react-redux";
 import { check_todo } from "../modules/todo";
 import styled from "@emotion/styled";
-
-function leftTime(completeDate) {
-  const current = new Date();
-}
-
-function viewDate(date) {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-}
+import { leftTime } from "../lib/leftTime";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
@@ -20,7 +13,7 @@ function Todo({ todo }) {
     >
       <h3>{todo.todo}</h3>
       <div>
-        <p>{viewDate(new Date(todo.createAt))}</p>
+        <p>{leftTime(new Date(todo.completeDate || todo.createAt))}</p>
       </div>
     </TodoWrapper>
   );
