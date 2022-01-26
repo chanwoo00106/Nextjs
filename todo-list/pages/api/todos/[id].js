@@ -22,7 +22,10 @@ export default async function handler(req, res) {
       // todo 전체 수정
       const result = await prisma.todo.update({
         where: { id: parseInt(id) },
-        data: { ...body },
+        data: {
+          todo: body.todo,
+          completeDate: `${body.completeDate}T00:00:00.000Z`,
+        },
       });
       res.status(200).json(result);
     } else if (method === "DELETE") {
@@ -33,6 +36,7 @@ export default async function handler(req, res) {
       res.status(404).json({ message: "Not Found" });
     }
   } catch (e) {
+    console.log(e);
     res.status(500).json(e);
   }
 }

@@ -4,6 +4,12 @@ import styled from "@emotion/styled";
 import { leftTime } from "../lib/leftTime";
 import { useState } from "react";
 
+function formatDate(date) {
+  if (date.getMonth() >= 10)
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return `${date.getFullYear()}-0${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 function Todo({ todo }) {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
@@ -42,7 +48,9 @@ function Todo({ todo }) {
           <input
             type="date"
             name="completeDate"
-            value={editValue.completeDate || todo.createAt}
+            value={formatDate(
+              new Date(editValue.completeDate || todo.createAt)
+            )}
             onChange={onChange}
           />
         </div>
