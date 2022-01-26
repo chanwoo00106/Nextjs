@@ -6,21 +6,25 @@ export default async function handler(req, res) {
   const {
     method,
     query: { id },
-    body: { checked },
+    body,
   } = req;
   try {
     if (method === "PATCH") {
       // checked 수정
-      if (checked === undefined)
+      if (body.checked === undefined)
         res.status(400).json({ message: "Bad Request" });
       const result = await prisma.todo.update({
         where: { id: parseInt(id) },
-        data: { checked },
+        data: { checked: body.checked },
       });
       res.status(200).json({ result });
     } else if (method === "PUT") {
       // todo 전체 수정
-      prisma.todo.update({ where: { id }, data: { ...body } });
+      const result = await prisma.todo.update({
+        where: { id: parseInt(id) },
+        data: { ...body },
+      });
+      res.status(200).json(result);
     } else if (method === "DELETE") {
       // 삭제
       const result = await prisma.todo.delete({ where: { id: parseInt(id) } });

@@ -5,12 +5,14 @@ import {
   getCheckedTodo,
   postCreateTodo,
   deleteRemoveTodo,
+  putUpdateTodo,
 } from "./api";
 
 const INIT_TODO = "INIT_TODO/todo";
 const CHECK_TODO = "CHECK_TODO/todo";
 const CREATE_TODO = "CREATE_TODO/todo";
 const DELETE_TODO = "DELETE_TODO/todo";
+const UPDATE_TODO = "UPDATE_TODO/todo";
 
 function* getTodo() {
   try {
@@ -51,9 +53,18 @@ function* removeTodo(action) {
   }
 }
 
+function* editTodo(action) {
+  try {
+    yield call(putUpdateTodo, { id: action.id, todoData: action.payload });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export default function* todoSaga() {
   yield takeLatest(INIT_TODO, getTodo);
   yield takeEvery(CHECK_TODO, checkTodo);
   yield takeLatest(CREATE_TODO, createTodo);
   yield takeLatest(DELETE_TODO, removeTodo);
+  yield takeLatest(UPDATE_TODO, editTodo);
 }
