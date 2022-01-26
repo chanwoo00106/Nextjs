@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       res.status(200).json({ result });
     } else if (method === "PUT") {
       // todo 전체 수정
+      prisma.todo.update({ where: { id }, data: { ...body } });
     } else if (method === "DELETE") {
       // 삭제
       const result = await prisma.todo.delete({ where: { id: parseInt(id) } });
